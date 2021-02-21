@@ -29,6 +29,10 @@ public class Radices {
    */
   public static String toString(long value, int radix) throws IllegalArgumentException {
 
+    if (radix < 2 || radix > 36) {
+      throw new IllegalArgumentException();
+    }
+
     String basis = "0123456789abcdefghijklmnopqrstuvwxyz";
     StringBuilder sb = new StringBuilder();
     long testVal = value;

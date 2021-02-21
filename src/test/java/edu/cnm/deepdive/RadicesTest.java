@@ -1,6 +1,7 @@
 package edu.cnm.deepdive;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 class RadicesTest {
@@ -13,6 +14,9 @@ class RadicesTest {
   static final String[] expected =
       {"-11111010", "13000", "-20402", "16514", "-186a0", "ca000", "2aovcow", "0", "0"};
 
+  static final long[] invalidValue = {10, 100, 1_000, 10_000};
+  static final int[] invalidRadix = {1, 0, -2, 40};
+
   @Test
   void testToStringLongInt() {
     String actual = "";
@@ -22,4 +26,12 @@ class RadicesTest {
     }
   }
 
+  @Test
+  void testExceptions() {
+    for (int i = 0; i < invalidRadix.length; i++) {
+      final Integer inner = Integer.valueOf(i);
+      assertThrows(IllegalArgumentException.class,
+          () -> Radices.toString(invalidValue[inner], invalidRadix[inner]));
+    }
+  }
 }
